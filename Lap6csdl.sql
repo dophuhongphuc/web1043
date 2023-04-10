@@ -1,0 +1,61 @@
+﻿use LAB5_QL_BAN_HANG
+--Bai1(a)--
+select	
+	HOA_DON.Ma_HD,
+	HOA_DON.Ma_KH,
+	HOA_DON.Trang_Thai,
+	HOA_DON_CHI_TIET.Ma_SP,
+	HOA_DON_CHI_TIET.So_Luong,
+	HOA_DON.Ngay_Mua_Hang,
+From HOA_DON Join HOA_DON_CHI_TIET on HOA_DON.Ma_HD= HOA_DON_CHI_TIET.Ma_HD
+--Bai1(b)--
+select	
+	HOA_DON.Ma_HD,
+	HOA_DON.Ma_KH,
+	HOA_DON.Trang_Thai,
+	HOA_DON_CHI_TIET.Ma_SP,
+	HOA_DON_CHI_TIET.So_Luong,
+	HOA_DON.Ngay_Mua_Hang,
+From HOA_DON Join HOA_DON_CHI_TIET on HOA_DON.Ma_HD= HOA_DON_CHI_TIET.Ma_HD
+Where
+	HOA_DON.Ma_KH = 'KH001'
+--Bai1(c)--
+Select
+	HOA_DON.Ma_HD,
+	HOA_DON.Ngay_Mua_Hang,
+	SAN_PHAM.Ten_SP,
+	HOA_DON_CHI_TIET.So_Luong,
+	(SAN_PHAM.Don_Gia_SP * HOA_DON_CHI_TIET.So_Luong ) as 'Tong'
+From HOA_DON Join HOA_DON_CHI_TIET on HOA_DON.Ma_HD= HOA_DON_CHI_TIET.Ma_HD
+	 JOIN SAN_PHAM on SAN_PHAM.Ma_SP = HOA_DON_CHI_TIET.Ma_SP
+--Bai1(d)--
+Select
+	CONCAT(KHACH_HANG.Ho_Va_Ten_Lot_KH, " ",KHACH_HANG.Ten_KH),
+	KHACH_HANG.EMAIL,
+	KHACH_HANG.Dien_Thoai,
+	HOA_DON.Ma_HD,
+	HOA_DON.Trang_Thai,
+	(SAN_PHAM.Don_Gia_SP * HOA_DON_CHI_TIET.So_Luong ) as 'Tong'
+	
+From KHACH_HANG JOIN HOA_DON on KHACH_HANG.Ma_KH = HOA_DON.Ma_KH
+	JOIN HOA_DON_CHI_TIET on HOA_DON.Ma_HD = HOA_DON_CHI_TIET.Ma_HD
+	JOIN SAN_PHAM on HOA_DON_CHI_TIET.Ma_SP = SAN_PHAM.Ma_SP
+where 
+	HOA_DON.Trang_Thai ='Chưa thanh toán';
+--BaI1(E)--
+Select
+	HOA_DON.Ma_HD,
+	HOA_DON.Ngay_Mua_Hang,
+	(SAN_PHAM.Don_Gia_SP * HOA_DON_CHI_TIET.So_Luong ) as Tong
+From 
+	HOA_DON JOIN HOA_DON_CHI_TIET on HOA_DON.Ma_HD= HOA_DON_CHI_TIET.Ma_HD
+	JOIN SAN_PHAM on SAN_PHAM.Ma_SP = HOA_DON_CHI_TIET.Ma_SP
+Where
+	(SAN_PHAM.Don_Gia_SP * HOA_DON_CHI_TIET.So_Luong ) >= 500000
+Order by Tong DESC
+--Bai2(a)--
+
+
+
+
+
